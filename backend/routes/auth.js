@@ -6,11 +6,12 @@ const { sendSuccess }  = require("../utils/response");
 
 const router = express.Router();
 
-// POST /api/auth/register
+// POST /api/auth/register — students only; role is ignored/forced to "student"
 router.post("/register", validate(schemas.register), async (req, res, next) => {
   try {
-    const { email, password, name, role, studentId } = req.body;
-    const result = await AuthService.register({ email, password, name, role, studentId });
+    const { email, password, name, studentId } = req.body;
+    // Explicitly exclude `role` from the destructure — it is always "student"
+    const result = await AuthService.register({ email, password, name, studentId });
     sendSuccess(res, result, { message: "Registration successful.", statusCode: 201 });
   } catch (err) { next(err); }
 });

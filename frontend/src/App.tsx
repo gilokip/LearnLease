@@ -21,6 +21,7 @@ const StudentPayments       = lazy(() => import("@pages/student/StudentPayments"
 const StudentTickets        = lazy(() => import("@pages/student/StudentTickets"));
 const AdminApplications     = lazy(() => import("@pages/admin/AdminApplications"));
 const AdminStudents         = lazy(() => import("@pages/admin/AdminStudents"));
+const AdminStaff            = lazy(() => import("@pages/admin/StaffPage"));
 const AdminLeases           = lazy(() => import("@pages/admin/AdminLeases"));
 const AdminReports          = lazy(() => import("@pages/admin/AdminReports"));
 const AdminSettings         = lazy(() => import("@pages/admin/AdminSettings"));
@@ -46,23 +47,32 @@ export default function App() {
         {/* Protected dashboard */}
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
-            <Route path="/dashboard"      element={<Overview />} />
-            <Route path="/profile"        element={<ProfilePage />} />
-            <Route path="/my-lease"       element={<StudentLease />} />
-            <Route path="/browse-devices" element={<BrowseDevices />} />
-            <Route path="/my-payments"    element={<StudentPayments />} />
-            <Route path="/my-tickets"     element={<StudentTickets />} />
-            <Route path="/applications"   element={<AdminApplications />} />
-            <Route path="/students"       element={<AdminStudents />} />
-            <Route path="/leases"         element={<AdminLeases />} />
-            <Route path="/admin-reports"  element={<AdminReports />} />
-            <Route path="/settings"       element={<AdminSettings />} />
-            <Route path="/devices"        element={<InventoryDevices />} />
-            <Route path="/maintenance"    element={<InventoryMaintenance />} />
-            <Route path="/assign"         element={<InventoryAssign />} />
-            <Route path="/billing"        element={<FinanceBilling />} />
-            <Route path="/payments"       element={<FinancePayments />} />
-            <Route path="/invoices"       element={<FinanceInvoices />} />
+            <Route path="/dashboard"       element={<Overview />} />
+            <Route path="/profile"         element={<ProfilePage />} />
+
+            {/* Student */}
+            <Route path="/my-lease"        element={<StudentLease />} />
+            <Route path="/browse-devices"  element={<BrowseDevices />} />
+            <Route path="/my-payments"     element={<StudentPayments />} />
+            <Route path="/my-tickets"      element={<StudentTickets />} />
+
+            {/* Admin */}
+            <Route path="/applications"    element={<AdminApplications />} />
+            <Route path="/students"        element={<AdminStudents />} />
+            <Route path="/staff"           element={<AdminStaff />} />
+            <Route path="/leases"          element={<AdminLeases />} />
+            <Route path="/admin-reports"   element={<AdminReports />} />
+            <Route path="/settings"        element={<AdminSettings />} />
+
+            {/* Inventory */}
+            <Route path="/devices"         element={<InventoryDevices />} />
+            <Route path="/maintenance"     element={<InventoryMaintenance />} />
+            <Route path="/assign"          element={<InventoryAssign />} />
+
+            {/* Finance */}
+            <Route path="/billing"         element={<FinanceBilling />} />
+            <Route path="/payments"        element={<FinancePayments />} />
+            <Route path="/invoices"        element={<FinanceInvoices />} />
             <Route path="/finance-reports" element={<FinanceReports />} />
           </Route>
         </Route>

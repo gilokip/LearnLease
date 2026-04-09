@@ -9,7 +9,7 @@ import {
   IconHome, IconLaptop, IconSearch, IconCreditCard, IconHeadphones,
   IconClipboard, IconGradCap, IconFileText, IconBarChart, IconSettings,
   IconTool, IconRefreshCw, IconDollarSign, IconReceipt, IconPieChart,
-  IconUser, IconChevronLeft, IconChevronRight, IconLogOut,
+  IconUser, IconChevronLeft, IconChevronRight, IconLogOut, IconUsers,
 } from "@components/ui/Icons";
 import Logo from "@components/ui/Logo";
 import type { Role } from "@types/index";
@@ -24,6 +24,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/my-tickets",      icon: <IconHeadphones size={15} />,  label: "Support",         roles: ["student"] },
   { to: "/applications",    icon: <IconClipboard size={15} />,   label: "Applications",    roles: ["admin"] },
   { to: "/students",        icon: <IconGradCap size={15} />,     label: "Students",        roles: ["admin"] },
+  { to: "/staff",           icon: <IconUsers size={15} />,       label: "Staff",           roles: ["admin"] },
   { to: "/leases",          icon: <IconFileText size={15} />,    label: "All Leases",      roles: ["admin","inventory"] },
   { to: "/admin-reports",   icon: <IconBarChart size={15} />,    label: "Reports",         roles: ["admin"] },
   { to: "/settings",        icon: <IconSettings size={15} />,    label: "Settings",        roles: ["admin"] },
@@ -55,7 +56,6 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="flex items-center px-4 h-[60px] flex-shrink-0 border-b" style={{ borderColor: "var(--border)" }}>
         {sidebarCollapsed ? (
-          // Collapsed: show icon mark only
           <div style={{ width: 28, height: 28, borderRadius: 7, background: "#3b5bfc", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>
