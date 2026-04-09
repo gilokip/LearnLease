@@ -30,4 +30,17 @@ router.get("/stats", async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// GET /api/dashboard/activity — recent activity feed, role-aware
+router.get("/activity", async (req, res, next) => {
+  try {
+    let activity;
+    if (req.user.role === "student") {
+      activity = await DashboardService.getStudentRecentActivity(req.user.id);
+    } else {
+      activity = await DashboardService.getRecentActivity();
+    }
+    sendSuccess(res, activity);
+  } catch (err) { next(err); }
+});
+
 module.exports = router;

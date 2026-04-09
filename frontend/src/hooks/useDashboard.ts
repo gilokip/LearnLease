@@ -9,3 +9,11 @@ export function useDashboardStats() {
     refetchInterval: 60_000, // refresh every minute
   });
 }
+
+export function useRecentActivity() {
+  return useQuery({
+    queryKey: [...queryKeys.dashboardStats(), "activity"],
+    queryFn:  dashboardService.getActivity,
+    refetchInterval: 60_000,
+  });
+}
