@@ -34,7 +34,7 @@ mysql -u root -p unilease < unilease.sql
 ## Backend
 
 ```bash
-cd unilease-backend
+cd backend
 ```
 
 Copy the environment file and fill in your database credentials:
@@ -71,7 +71,7 @@ The API will be running at `http://localhost:3001`.
 Open a new terminal tab:
 
 ```bash
-cd unilease-frontend
+cd frontend
 cp .env.example .env
 npm install
 npm run dev
