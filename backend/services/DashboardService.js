@@ -1,8 +1,9 @@
-const DeviceModel       = require("../models/Device");
-const LeaseModel        = require("../models/Lease");
-const UserModel         = require("../models/User");
-const PaymentModel      = require("../models/Payment");
+const DeviceModel        = require("../models/Device");
+const LeaseModel         = require("../models/Lease");
+const UserModel          = require("../models/User");
+const PaymentModel       = require("../models/Payment");
 const SupportTicketModel = require("../models/SupportTicket");
+const MaintenanceLog     = require("../models/MaintenanceLog");
 
 class DashboardService {
   /**
@@ -34,25 +35,24 @@ class DashboardService {
    * Stats visible to a student.
    */
   static async getStudentStats(studentId) {
-    const { default: LeaseModel } = await Promise.resolve(require("../models/Lease"));
     const leases  = await LeaseModel.findByStudent(studentId);
-    const active  = leases.find(l => l.status === "active");
-    const pending = leases.find(l => l.status === "pending");
+    const active  = leases.find(l => l.status === "active")  || null;
+    const pending = leases.find(l => l.status === "pending") || null;
 
     const payments = active
-      ? await PaymentModel.findByLease(active.id)
-      : [];
+        ? await PaymentModel.findByLease(active.id)
+        : [];
 
-    const nextDue = payments.find(p => p.status === "pending");
+    const nextDue = payments.find(p => p.status === "pending")   || null;
     const overdue = payments.filter(p => p.status === "overdue");
 
     return {
-      activeLease:  active  || null,
-      pendingLease: pending || null,
-      nextPayment:  nextDue || null,
-      overdueCount: overdue.length,
+      activeLease:   active,
+      pendingLease:  pending,
+      nextPayment:   nextDue,
+      overdueCount:  overdue.length,
       overdueAmount: overdue.reduce((s, p) => s + Number(p.amount), 0),
-      leaseHistory: leases,
+      leaseHistory:  leases,
     };
   }
 
@@ -60,11 +60,11 @@ class DashboardService {
    * Stats for inventory dashboard.
    */
   static async getInventoryStats() {
-    const [summary, maintenanceList] = await Promise.all([
+    const [summary, recentMaintenance] = await Promise.all([
       DeviceModel.getInventorySummary(),
-      require("../models/MaintenanceLog").findAll({ status: "in_progress", limit: 5 }),
+      MaintenanceLog.findAll({ status: "in_progress", limit: 5 }),
     ]);
-    return { summary, recentMaintenance: maintenanceList };
+    return { summary, recentMaintenance };
   }
 
   /**
