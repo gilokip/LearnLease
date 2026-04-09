@@ -7,7 +7,7 @@ University Laptop Lease Management System — full-stack platform for students, 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org) v18+
-- [MySQL](https://www.mysql.com) 8.0+
+- [MySQL](https://www.mysql.com) =>8.0
 
 ---
 
