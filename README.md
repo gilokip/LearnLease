@@ -26,7 +26,7 @@ Create the database and import the schema file included in the repo:
 
 ```bash
 mysql -u root -p -e "CREATE DATABASE unilease;"
-mysql -u root -p unilease < database_schema.sql
+mysql -u root -p unilease < unilease.sql
 ```
 
 ---
